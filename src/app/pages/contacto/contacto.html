@@ -1,0 +1,108 @@
+<div class="title-page-container d-flex justify-content-center align-items-center">
+  <h3 class="mb-0">Contacto</h3>
+</div>
+
+<div class="container mt-5 mb-5">
+
+  <div class="row">
+    <!-- Columna izquierda: Datos de contacto + Mapa -->
+    <div class="col-md-5 mb-4">
+      <h5>Farma De A Sol</h5>
+      <p><strong>Dirección:</strong>Av. José Santos Chocano 107 Carmen de la Legua-Reynoso, Callao</p>
+      <p><strong>Teléfono:</strong> +51 923 626 053</p>
+      <p><strong>Correo:</strong> contacto&#64;farmadeasol.com</p>
+      <p><strong>Horario:</strong> 24/7 - Siempre disponibles para ti</p>
+
+      <!-- Imagen del mapa -->
+      <div class="container mt-4">
+  <h2 class="mb-3">Encuéntranos</h2>
+
+  <div class="ratio ratio-4x3 rounded shadow">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d410.1482663502447!2d-77.09808708065933!3d-12.042839688724008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105ceab40c652d3%3A0x86236158af414642!2sFarma%20Deasol!5e0!3m2!1ses!2spe!4v1750643710941!5m2!1ses!2spe" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</div>
+    </div>
+
+    <!-- Columna derecha: Formulario -->
+    <div class="col-md-7">
+      <form [formGroup]="contactoForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Nombre -->
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" id="nombre" class="form-control"
+                [ngClass]="{'is-invalid': esInvalido('nombre')}"
+                formControlName="nombre" placeholder="Tu nombre" required>
+          <div *ngIf="esInvalido('nombre')" class="invalid-feedback">
+            El nombre es obligatorio.
+          </div>
+        </div>
+
+        <!-- Apellido -->
+      <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text"
+              class="form-control"
+              id="apellido"
+              placeholder="Tu apellido"
+              formControlName="apellido"
+              [ngClass]="{'is-invalid': esInvalido('apellido')}">
+        <div *ngIf="esInvalido('apellido')" class="invalid-feedback d-block">
+          El apellido es obligatorio.
+        </div>
+      </div>
+
+        <!-- Celular -->
+        <div class="mb-3">
+          <label for="celular" class="form-label">Celular</label>
+          <div class="input-group">
+            <span class="input-group-text">+51</span>
+            <input type="tel"
+                  class="form-control"
+                  id="celular"
+                  placeholder="987654321"
+                  formControlName="celular"
+                  maxlength="9"
+                  [ngClass]="{'is-invalid': esInvalido('celular')}">
+          </div>
+          <div *ngIf="esInvalido('celular')" class="invalid-feedback d-block">
+            Escribe un número de celular válido de 9 dígitos.
+          </div>
+        </div>
+
+
+
+        <!-- Correo -->
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo Electrónico</label>
+          <input type="email" id="correo" class="form-control"
+                [ngClass]="{'is-invalid': esInvalido('correo')}"
+                formControlName="correo" placeholder="tu@correo.com" required>
+          <div *ngIf="esInvalido('correo')" class="invalid-feedback">
+            Ingresa un correo electrónico válido.
+          </div>
+        </div>
+
+        <!-- Mensaje -->
+        <div class="mb-3">
+          <label for="mensaje" class="form-label">Mensaje</label>
+          <textarea id="mensaje" class="form-control"
+                    [ngClass]="{'is-invalid': esInvalido('mensaje')}"
+                    formControlName="mensaje" rows="4" placeholder="Escribe tu mensaje aquí" required></textarea>
+          <div *ngIf="esInvalido('mensaje')" class="invalid-feedback">
+            El mensaje es obligatorio.
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+
+
+    </div>
+  </div>
+</div>

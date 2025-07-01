@@ -1,0 +1,17 @@
+img {
+  width: 100%;
+  height: auto;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+.fs-4 {
+  font-size: 1.5rem;
+}
+
+/* Fin DetalleProducto */
+.alert {
+  transition: opacity 0.5s ease-in-out;
+}

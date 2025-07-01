@@ -1,0 +1,42 @@
+<div class="container py-4">
+  <h4 class="mb-3">Selecciona el tipo de envío</h4>
+
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="tipoEnvio" id="envioDomicilio" value="domicilio" [(ngModel)]="tipoEnvio">
+    <label class="form-check-label" for="envioDomicilio">
+      Envío a domicilio
+    </label>
+  </div>
+
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="tipoEnvio" id="retiroTienda" value="tienda" [(ngModel)]="tipoEnvio">
+    <label class="form-check-label" for="retiroTienda">
+      Retiro en tienda
+    </label>
+  </div>
+
+  <div class="mt-4" *ngIf="tipoEnvio === 'domicilio'">
+    <h5>Dirección de envío:</h5>
+    <p><strong>Dirección:</strong> {{ direccionCliente }}</p>
+    <p><strong>Costo de envío:</strong> S/ 2.50</p>
+  </div>
+
+  <div class="mt-4" *ngIf="tipoEnvio === 'tienda'">
+    <h5>Retiro en tienda:</h5>
+    <p><strong>Dirección:</strong>Av. José Santos Chocano 107, Carmen de la Legua-Reynoso, Callao</p>
+    <p><strong>Teléfono:</strong> +51 923 626 053</p>
+    <p><strong>Horario:</strong> 24/7</p>
+
+    <div class="ratio ratio-4x3 rounded shadow mt-3">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d410.1482663502447!2d-77.09808708065933!3d-12.042839688724008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105ceab40c652d3%3A0x86236158af414642!2sFarma%20Deasol!5e0!3m2!1ses!2spe!4v1750643710941!5m2!1ses!2spe"
+        style="border:0;" allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex justify-content-end">
+    <button class="btn btn-outline-secondary me-2" (click)="volver()">← Volver al carrito</button>
+    <button class="btn btn-primary" (click)="continuar()">Continuar</button>
+  </div>
+</div>

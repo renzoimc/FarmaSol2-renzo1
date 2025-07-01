@@ -1,0 +1,22 @@
+[
+  { "id": 1, "nombre": "Alcohol en Gel", "precio": 5.50 , "imagen": "img1.jpg", "descripcion": "Alcohol en gel al 70% para desinfección de manos."},
+  { "id": 2, "nombre": "Enjuague Bucal Colgate", "precio": 18.90 , "imagen": "img2.jpg", "descripcion": "Enjuague bucal Colgate para una limpieza profunda y fresca."},
+  { "id": 3, "nombre": "Ensure Advance", "precio": 94.90 , "imagen": "img3.jpg", "descripcion": "Nutrición completa y balanceada para adultos, sabor vainilla."},
+  { "id": 4, "nombre": "Jabon Carbon Activado", "precio": 9.90 , "imagen": "img4.jpg", "descripcion": "Jabón con carbón activado para una limpieza profunda de la piel."},
+  { "id": 5, "nombre": "Vitamina Zinc", "precio": 14.90 , "imagen": "img5.jpg", "descripcion": "Suplemento de zinc para fortalecer el sistema inmunológico."},
+  { "id": 6, "nombre": "Vitamina E", "precio": 30.00 , "imagen": "img6.jpg", "descripcion": "Vitamina E en cápsulas para la salud de la piel y antioxidante."},
+  { "id": 7, "nombre": "Cereal Infantil", "precio": 15.90 , "imagen": "img7.jpg","descripcion": "Cereal infantil nutritivo, ideal para el desayuno de los más pequeños."},
+  { "id": 8, "nombre": "Glucovit Max", "precio": 86.90 , "imagen": "img8.jpg","descripcion": "Suplemento vitamínico Glucovit Max, ideal para adultos."},
+  { "id": 9, "nombre": "Goicochea crema para piernas", "precio": 30.90 , "imagen": "img9.jpg","descripcion": "Crema Goicochea para aliviar la pesadez y cansancio en las piernas."},
+  { "id": 10, "nombre": "Espuma para afeitar", "precio": 18.90 , "imagen": "img10.jpg","descripcion": "Espuma de afeitar suave y refrescante para un afeitado cómodo."},
+  { "id": 11, "nombre": "Mochila de emergencia", "precio": 43.00 , "imagen": "img11.jpg","descripcion": "Mochila de emergencia con suministros básicos para primeros auxilios."},
+  { "id": 12, "nombre": "Oximetro", "precio": 59.00 , "imagen": "img12.jpg", "descripcion": "Oximetro de pulso para medir la saturación de oxígeno en sangre."},
+  { "id": 13, "nombre": "Alcohol de 70° - Promo", "precio": 20.00 , "imagen": "img13.jpg", "descripcion": "Alcohol al 70% para desinfección de superficies y manos."},
+  { "id": 14, "nombre": "Agua Micelar Nivea", "precio": 33.90 , "imagen": "img14.jpg","descripcion": "Agua micelar Nivea para una limpieza suave y efectiva del rostro."},
+  { "id": 15, "nombre": "Vitamina Magnesio", "precio": 11.90 , "imagen": "img15.jpg","descripcion": "Suplemento de magnesio para la salud muscular y nerviosa."},
+  { "id": 16, "nombre": "Alcohol de 90° - Promo", "precio": 20.00 , "imagen": "img16.jpg","descripcion": "Alcohol al 90% para desinfección de alta eficacia."},
+  { "id": 17, "nombre": "Ensure Advance - Promo", "precio": 187.00 , "imagen": "img17.jpg","descripcion": "Nutrición completa y balanceada para adultos, sabor chocolate."},
+  { "id": 18, "nombre": "Pediasure - Promo", "precio": 75.00 , "imagen": "img18.jpg","descripcion": "Suplemento nutricional Pediasure para niños, sabor vainilla."},
+  { "id": 19, "nombre": "Polvos antisudorales", "precio": 8.50 , "imagen": "img19.jpg", "descripcion": "Polvos antisudorales para mantener la piel seca y fresca."},
+    { "id": 20, "nombre": "Spray AntiResfriado Vick ", "precio": 24.90 , "imagen": "img20.jpg","descripcion": "Spray nasal Vick para aliviar la congestión y resfriados."}
+  ]

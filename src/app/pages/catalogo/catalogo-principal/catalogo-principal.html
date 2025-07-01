@@ -1,0 +1,39 @@
+<!-- catalogo-principal.html -->
+<div class="title-page-container d-flex justify-content-center align-items-center">
+  <h2 class="mb-0">Todos los Productos</h2>
+</div>
+
+<div class="container mt-3">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb p-2 rounded">
+      <li class="breadcrumb-item"><a routerLink="home">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Productos</li>
+    </ol>
+  </nav>
+</div>
+
+<div class="container mt-2 py-4">
+  <div class="row">
+    <!-- Iterar productos disponibles -->
+    <div *ngFor="let item of productos; trackBy: trackById" class="col-sm-3 mt-2">
+      <div class="card mb-3 pb-2">
+        <!-- Imagen del producto -->
+        <img [src]="'img/' + item.imagen" alt="{{ item.nombre }}" />
+        <div class="card-body">
+          <p class="fw-bold">{{ item.nombre }}</p>
+          <small class="card-precio fw-bold">S/{{ item.precio }}</small>
+          <div class="mt-2 d-flex justify-content-between align-items-center">
+            <!-- Botón para agregar al carrito -->
+            <button (click)="agregarProducto(item)" type="button" class="btn btn-sm btn-success">
+              <i class="fa fa-shopping-cart"></i> Agregar al carrito
+            </button>
+            <!-- Botón para navegar al detalle del producto -->
+            <button (click)="verDetalle(item.id)" type="button" class="btn btn-sm btn-outline-primary">
+              <i class="fa fa-info-circle"></i> Detalle
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

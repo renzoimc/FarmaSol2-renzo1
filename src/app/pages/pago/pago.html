@@ -1,0 +1,179 @@
+<div class="container py-5">
+  <h2 class="mb-4">Pasarela de Pagos</h2>
+  <div class="d-flex justify-content-start mb-3">
+  <button class="btn btn-outline-secondary" (click)="volver()">← Volver</button>
+  </div>
+  <!-- Selección de método -->
+  <div class="mb-4">
+    <label class="form-label fw-bold">Método de pago:</label>
+    <div class="btn-group w-100" role="group">
+      <!-- Contraentrega -->
+      <input type="radio" class="btn-check" name="metodoPago" id="mpContra" autocomplete="off"
+        [(ngModel)]="pago.metodo" [value]="'contra'" />
+      <label class="btn btn-outline-primary" for="mpContra"> Contraentrega </label>
+
+      <!-- Tarjeta -->
+      <input type="radio" class="btn-check" name="metodoPago" id="mpTarjeta" autocomplete="off"
+        [(ngModel)]="pago.metodo" [value]="'tarjeta'" />
+      <label class="btn btn-outline-primary" for="mpTarjeta"> Tarjeta </label>
+
+      <!-- Billeteras -->
+      <input type="radio" class="btn-check" name="metodoPago" id="mpWallet" autocomplete="off"
+        [(ngModel)]="pago.metodo" [value]="'wallet'" />
+      <label class="btn btn-outline-primary" for="mpWallet"> Billeteras </label>
+    </div>
+  </div>
+
+  <!-- Fila principal -->
+  <div class="row align-items-start">
+    <!-- Columna formulario -->
+    <div class="col-md-7">
+
+      <!-- Contraentrega -->
+      <div *ngIf="pago.metodo === 'contra'">
+        <p>Pagarás en efectivo al momento de la entrega.</p>
+        <button class="btn btn-success w-100" (click)="pagar()">
+          Confirmar pedido S/ {{ total | number: '1.2-2' }}
+        </button>
+      </div>
+
+      <!-- Tarjeta -->
+      <form *ngIf="pago.metodo === 'tarjeta'" (ngSubmit)="pagar()" #formPago="ngForm" novalidate>
+        <!-- Nombre -->
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" id="nombre" class="form-control" required [(ngModel)]="pago.nombre" name="nombre"
+            #nombre="ngModel" />
+          <div *ngIf="nombre.invalid && nombre.touched" class="text-danger"> El nombre es obligatorio. </div>
+        </div>
+
+        <!-- Apellido -->
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellido</label>
+          <input type="text" id="apellido" class="form-control" required [(ngModel)]="pago.apellido"
+            name="apellido" #apellido="ngModel" />
+          <div *ngIf="apellido.invalid && apellido.touched" class="text-danger"> El apellido es obligatorio. </div>
+        </div>
+
+        <!-- Número de tarjeta -->
+        <div class="mb-3">
+          <label for="numero" class="form-label">Número de tarjeta</label>
+          <input type="text" id="numero" class="form-control" required pattern="^[0-9]{16}$" maxlength="16"
+            [(ngModel)]="pago.tarjeta" name="tarjeta" #tarjeta="ngModel" />
+          <div *ngIf="tarjeta.invalid && tarjeta.touched" class="text-danger"> Ingrese 16 dígitos numéricos. </div>
+        </div>
+
+        <!-- Fecha y CVV -->
+        <div class="row">
+          <!-- Expiración -->
+          <div class="col-md-6 mb-3">
+            <label for="expira" class="form-label">Expiración</label>
+            <input type="text" id="expira" class="form-control" placeholder="MM/AA" maxlength="5" required
+              pattern="^(0[1-9]|1[0-2])\/\d{2}$" [(ngModel)]="pago.expiracion" name="expiracion"
+              (input)="formatearFechaExpiracion($event)" #expiracion="ngModel" />
+            <div *ngIf="expiracion.invalid && expiracion.touched" class="text-danger">
+              Ingrese una fecha válida en formato MM/AA.
+            </div>
+          </div>
+
+          <!-- CVV -->
+          <div class="col-md-6 mb-3">
+            <label for="cvv" class="form-label">CVV</label>
+            <input type="password" id="cvv" class="form-control" required maxlength="3" pattern="^\d{3}$"
+              inputmode="numeric" [(ngModel)]="pago.cvv" name="cvv" #cvv="ngModel" />
+            <div *ngIf="cvv.invalid && cvv.touched" class="text-danger">
+              El CVV debe tener 3 dígitos.
+            </div>
+          </div>
+        </div>
+
+        <!-- Guardar tarjeta -->
+        <div class="form-check mb-4">
+          <input type="checkbox" class="form-check-input" id="guardar" [(ngModel)]="pago.guardar" name="guardar" />
+          <label for="guardar" class="form-check-label"> Guardar esta tarjeta para futuras compras </label>
+        </div>
+
+        <!-- Botón pagar -->
+        <button class="btn btn-success w-100" [disabled]="formPago.invalid" type="submit">
+          <i class="bi bi-credit-card-fill me-2"></i> Pagar S/ {{ total | number: '1.2-2' }}
+        </button>
+      </form>
+
+      <!-- Billeteras digitales -->
+      <div *ngIf="pago.metodo === 'wallet'">
+        <label class="form-label">Seleccione billetera</label>
+        <div class="d-flex gap-4 mb-3">
+          <!-- Yape -->
+          <div class="d-flex flex-column align-items-center">
+            <input type="radio" class="btn-check" name="walletOpt" id="yape" autocomplete="off"
+              [(ngModel)]="pago.wallet" [value]="'yape'" />
+            <label class="btn btn-outline-success mb-2" for="yape">Yape</label>
+          </div>
+
+          <!-- Plin -->
+          <div class="d-flex flex-column align-items-center">
+            <input type="radio" class="btn-check" name="walletOpt" id="plin" autocomplete="off"
+              [(ngModel)]="pago.wallet" [value]="'plin'" />
+            <label class="btn btn-outline-success mb-2" for="plin">Plin</label>
+          </div>
+        </div>
+
+        <!-- Mostrar QR dinámico -->
+        <div *ngIf="pago.wallet" class="d-flex flex-column align-items-start gap-2">
+          <p class="mb-1">
+            Escanea este código QR con <strong>{{ pago.wallet }}</strong>:
+          </p>
+          <img
+            [src]="'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + (pago.wallet === 'yape' ? 'https://www.yape.com.pe' : 'https://www.plin.pe')"
+            alt="QR {{ pago.wallet }}" class="img-fluid mb-3" />
+
+          <button class="btn btn-success w-100" (click)="pagar()">
+            Confirmar pago S/ {{ total | number: '1.2-2' }}
+          </button>
+        </div>
+      </div>
+      <!-- /Billeteras -->
+    </div>
+
+    <!-- Columna derecha: resumen de pedido -->
+    <div class="col-md-5">
+      <div class="card shadow-sm h-100">
+        <div class="card-header bg-light fw-bold">Resumen de pedido</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex align-items-start gap-2" *ngFor="let item of carrito">
+            <img [src]="'/img/' + item.producto.imagen" alt="{{ item.producto.nombre }}" width="48" height="48"
+              class="rounded border" style="object-fit: cover" />
+            <div class="flex-grow-1" style="min-width: 0">
+              <div class="fw-semibold text-truncate" style="max-width: 200px">
+                {{ item.producto.nombre }}
+              </div>
+              <small class="text-muted">Cantidad: {{ item.cantidad }}</small>
+            </div>
+            <span class="fw-semibold">S/ {{ (item.producto.precio * item.cantidad) | number: '1.2-2' }}</span>
+          </li>
+
+          <!-- Mostrar tipo de envío y costo -->
+          <li class="list-group-item d-flex justify-content-between">
+            Envío: <span class="fw-bold text-capitalize">
+            {{ tipoEnvio }}
+            <span *ngIf="tipoEnvio === 'tienda'"> (Gratis)</span>
+            <span *ngIf="tipoEnvio === 'domicilio'">  S/ {{ costoEnvio | number: '1.2-2' }}</span>
+          </span>
+                    </li>
+
+          <!-- Subtotal sin envío -->
+          <li class="list-group-item d-flex justify-content-between">
+            Subtotal:
+            <span>S/ {{ subtotal | number: '1.2-2' }}</span>
+          </li>
+
+          <!-- Total final -->
+          <li class="list-group-item d-flex justify-content-between fw-bold">
+            Total:
+            <span>S/ {{ total | number: '1.2-2' }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

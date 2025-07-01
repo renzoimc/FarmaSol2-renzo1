@@ -1,0 +1,13 @@
+.title-page-container{
+    height: 150px;
+    width: 100%;
+    background-image: url("../../../../../public/img/bg-title.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.title-page-container h2{
+    font-weight: 700;
+    color: white;
+}

@@ -1,0 +1,47 @@
+<!-- Solo muestra el contenido si el resumen existe -->
+<div class="container py-5" *ngIf="resumen">
+  <!-- Mensaje de confirmación -->
+  <h2 class="mb-3">¡Gracias por tu compra!</h2>
+  <p class="text-success">Tu pedido ha sido recibido y confirmado correctamente.</p>
+
+  <!-- Código de pedido generado -->
+  <div class="mb-3"><strong>Código de pedido:</strong> #{{ resumen.codigoPedido }}</div>
+
+  <div class="row">
+    <!-- Columna izquierda: detalles del cliente y envío -->
+    <div class="col-md-7">
+      <div class="mb-2"><strong>Cliente:</strong> {{ resumen.nombre }} {{ resumen.apellido }}</div>
+      <div class="mb-2"><strong>Dirección:</strong> {{ resumen.direccion }}</div>
+      <div class="mb-2"><strong>Tiempo estimado:</strong> {{ resumen.tiempoEstimado }}</div>
+      <div class="mb-2"><strong>Método de pago:</strong> {{ descripcionMetodoPago }}</div>
+      <div class="mb-4"><strong>Items:</strong> {{ cantidadItems }} productos</div>
+    </div>
+
+    <!-- Columna derecha: boleta de compra -->
+    <div class="col-md-5">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light fw-bold">Boleta de compra</div>
+        <ul class="list-group list-group-flush">
+          <!-- Listado de productos -->
+          <li *ngFor="let item of resumen.carrito" class="list-group-item d-flex justify-content-between">
+            {{ item.producto.nombre }} x{{ item.cantidad }}
+            <span>S/ {{ (item.producto.precio * item.cantidad) | number: '1.2-2' }}</span>
+          </li>
+
+          <!-- Subtotal, envío y total -->
+          <li class="list-group-item d-flex justify-content-between">
+            Subtotal: <span>S/ {{ resumen.subtotal | number: '1.2-2' }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            Envío:
+            <span *ngIf="resumen.costoEnvio === 0">Gratis</span>
+            <span *ngIf="resumen.costoEnvio > 0">S/ {{ resumen.costoEnvio | number: '1.2-2' }}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between fw-bold">
+            Total: <span>S/ {{ resumen.total | number: '1.2-2' }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

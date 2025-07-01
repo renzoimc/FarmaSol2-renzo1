@@ -1,0 +1,61 @@
+<div class="container py-5">
+  <button class="btn btn-link mb-3" (click)="volver()">
+    <i class="bi bi-arrow-left"></i> Volver
+  </button>
+
+  <!-- Mostrar detalles del producto si existe -->
+  <div *ngIf="producto" class="row">
+    <div class="col-md-6">
+      <img [src]="'img/' + producto.imagen" alt="{{ producto.nombre }}" class="img-fluid rounded">
+    </div>
+    <div class="col-md-6">
+      <h2>{{ producto.nombre }}</h2>
+      <p class="fs-4 text-success">S/{{ producto.precio | number:'1.2-2' }}</p>
+      <p>{{ producto.descripcion }}</p>
+
+      <!-- Selector de cantidad -->
+      <div class="mb-3">
+      <label class="form-label">Cantidad</label>
+      <div class="d-flex align-items-center gap-3">
+        <!-- Botón - -->
+        <button class="btn btn-outline-secondary" (click)="cambiarCantidad(-1)" [disabled]="cantidad <= 1">
+          <i class="fa fa-minus"></i>
+        </button>
+
+        <!-- Cantidad actual -->
+        <span class="fs-5">{{ cantidad }}</span>
+
+        <!-- Botón + -->
+        <button class="btn btn-outline-secondary" (click)="cambiarCantidad(1)">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+
+      <!-- Botones: Agregar e Ir al carrito -->
+    <div class="d-flex gap-2">
+      <button
+        class="btn btn-success"
+        (click)="agregarAlCarrito()"
+        [disabled]="!cantidad || cantidad < 1"
+      >
+        <i class="fa fa-shopping-cart me-1"></i> Agregar
+      </button>
+
+      <button class="btn btn-outline-primary" (click)="irAlCarrito()">
+        <i class="fa fa-arrow-right me-1"></i> Ir al carrito
+      </button>
+    </div>
+
+
+    <div class="alert alert-success mt-3" *ngIf="mensajeAgregado">
+    Producto agregado al carrito correctamente.
+  </div>
+
+  <!-- Mostrar mensaje si no se encuentra el producto -->
+  <div *ngIf="!producto" class="text-center p-5">
+    <p>Producto no encontrado.</p>
+  </div>
+</div>
+
