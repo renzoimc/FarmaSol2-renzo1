@@ -15,6 +15,17 @@
     <span style="color: #189532;">Farma</span><span style="color: #dc3545;">Sol</span>
   </h2>
 
+  <!-- ALERTAS -->
+  <div *ngIf="alertaCampos" class="alerta-error">
+    <i class="fa fa-exclamation-circle"></i> Por favor completa todos los campos obligatorios.
+  </div>
+  <div *ngIf="alertaTerminos" class="alerta-warning">
+    <i class="fa fa-exclamation-triangle"></i> Debes aceptar los Términos y Condiciones para continuar.
+  </div>
+  <div *ngIf="alertaPassword" class="alerta-error">
+    <i class="fa fa-exclamation-circle"></i> Las contraseñas no coinciden.
+  </div>
+
   <!-- FORMULARIO COMPLETO -->
   <div class="w-100">
 
@@ -138,8 +149,6 @@
       </label>
     </div>
 
-    
-
     <!-- BOTÓN REGISTRAR -->
     <div class="text-end">
       <button class="btn btn-success px-4 py-2" (click)="validarTerminos()">
@@ -149,4 +158,3 @@
 
   </div>
 </div>
-

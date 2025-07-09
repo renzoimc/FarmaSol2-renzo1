@@ -46,6 +46,11 @@ export class Register implements OnInit {
   // Modo invitado
   modoInvitado: boolean = false;
 
+  // Alertas visuales
+  alertaCampos: boolean = false;
+  alertaTerminos: boolean = false;
+  alertaPassword: boolean = false;
+
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
@@ -62,8 +67,13 @@ export class Register implements OnInit {
   validarTerminos(): void {
     this.terminosTocado = true;
 
+    // Reinicia alertas previas
+    this.alertaCampos = false;
+    this.alertaTerminos = false;
+    this.alertaPassword = false;
+
     if (!this.terminosAceptados) {
-      alert('Debes aceptar los Términos y Condiciones para continuar.');
+      this.alertaTerminos = true;
       return;
     }
 
@@ -74,14 +84,16 @@ export class Register implements OnInit {
    * Lógica completa de registro del usuario
    */
   registrar(): void {
+    // Verifica campos requeridos
     if (!this.email || !this.nombre || !this.apellido || !this.tipoDocumento || !this.numeroDocumento ||
         !this.direccion || !this.departamento || !this.distrito) {
-      alert('Por favor completa todos los campos obligatorios.');
+      this.alertaCampos = true;
       return;
     }
 
+    // Valida contraseña
     if (!this.modoInvitado && this.password !== this.confirmarPassword) {
-      alert('Las contraseñas no coinciden');
+      this.alertaPassword = true;
       return;
     }
 
@@ -141,6 +153,3 @@ export class Register implements OnInit {
     this.confirmarPassword = '';
   }
 }
-
-
-

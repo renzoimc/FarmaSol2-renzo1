@@ -99,3 +99,31 @@ button.btn-success:hover {
     font-size: 1.4rem;
   }
 }
+
+/* ALERTAS DE VALIDACIÓN PERSONALIZADAS */
+.alerta-error,
+.alerta-warning {
+  max-width: 520px;
+  margin: 0 auto 1rem auto;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.88rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.alerta-error {
+  background-color: #fdecea;
+  border: 1px solid #f5c2c7;
+  color: #842029;
+}
+
+.alerta-warning {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+}
+
+.alerta-error i,
+.alerta-warning i {
+  margin-right: 6px;
+}
