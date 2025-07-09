@@ -14,4 +14,50 @@
 .title-page-container h3{
     font-weight: 700;
     color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+/* --- Secciones Misión, Visión, Servicios --- */
+.seccion-mv,
+.seccion-servicios {
+  padding: 2rem 1rem;
+  margin-bottom: 3rem;
+  border-radius: 15px;
+ 
+}
+
+/* --- Títulos personalizados --- */
+.titulo-seccion {
+  color: #28a745;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.texto-nosotros {
+  margin-top: 15px;
+  color: #525252;
+  font-size: 1.2rem;
+}
+/* --- Texto de misión/visión --- */
+.texto-seccion {
+  color: #525252;
+  font-size: 1.2rem;
+}
+
+/* --- Lista de servicios --- */
+.lista-servicios li {
+  font-size: 1.05rem;
+  color: #555; 
+  padding-left: 0.75rem;
+  border-left: 4px solid #28a745;
+  border-radius: 4px;
+}
+
+.lista-servicios li strong {
+  color: #525252; 
+}
+
+.lista-servicios li:hover {
+  background-color: #f5f5f5;
+}
+

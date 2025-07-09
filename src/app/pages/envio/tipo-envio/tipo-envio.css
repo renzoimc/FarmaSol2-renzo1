@@ -1,7 +1,46 @@
+:host {
+  display: block;
+  min-height: calc(100vh - 150px);
+}
+
+
+.titulo-envio {
+  color: #1f8a4c;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-body p i {
+  color: #525252;
+}
+.card-body p {
+  color: #525252;
+}
+
+/* Tipografía general */
 h4, h5 {
   font-weight: bold;
 }
-
 p {
   margin-bottom: 4px;
+}
+
+/* Botón radio seleccionado a verde */
+.form-check-input:checked {
+  background-color: #1f8a4c;
+  border-color: #1f8a4c;
+}
+
+
+.text-dato {
+  color: #525252;
+  font-weight: 500;
+}
+
+.card-body p {
+  color: #525252;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

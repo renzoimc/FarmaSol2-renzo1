@@ -5,6 +5,11 @@
     
 }
 
+
 body{
     background-color: #F4F5F8;
+}
+
+html, body {
+  height: 100%;
 }

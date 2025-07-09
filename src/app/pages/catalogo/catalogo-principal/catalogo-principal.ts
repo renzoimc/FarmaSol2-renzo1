@@ -1,55 +1,45 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ProductoService } from '../../../core/services/producto';
 import { CarritoService } from '../../../core/services/carrito';
 import { ProductoModel } from '../../../core/models/producto-model';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-catalogo-principal',
   standalone: true,
-  imports: [RouterModule,CommonModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './catalogo-principal.html',
   styleUrls: ['./catalogo-principal.css']
 })
 export class CatalogoPrincipal implements OnInit {
-  // Inyectamos servicios necesarios
-  private productoService = inject(ProductoService); // servicio para obtener productos
-  private carritoService = inject(CarritoService);     // servicio para manejar carrito
-  private router = inject(Router);                    // router para navegación
+  private productoService = inject(ProductoService);
+  private carritoService = inject(CarritoService);
 
-  productos: ProductoModel[] = []; // lista cargada desde el backend
+  productos: ProductoModel[] = [];
+  mensajeAgregado: { [id: number]: boolean } = {};
 
   ngOnInit(): void {
-    this.getProductos(); // al iniciar, obtenemos el listado
-  }
-
-  getProductos() {
     this.productoService.getProductos().subscribe({
-      next: data => this.productos = data,
-      error: e => console.error(e)
+      next: (data) => {
+        if (Array.isArray(data)) {
+          this.productos = data;
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar productos', err);
+      }
     });
   }
 
-  /**
-   * Agrega un producto al carrito de compras.
-   */
-  agregarProducto(item: ProductoModel) {
-    this.carritoService.agregar(item);
-  }
+  agregarAlCarrito(producto: ProductoModel): void {
+    this.carritoService.agregar(producto, 1);
+    this.mensajeAgregado[producto.id] = true;
 
-  /**
-   * Navega al componente de detalle de producto.
-   * @param id Identificador del producto
-   */
-  verDetalle(id: number) {
-    this.router.navigate(['/producto', id]);
-  }
-
-  /**
-   * trackBy para optimizar *ngFor y evitar re-renderizados innecesarios.
-   */
-  trackById(index: number, item: ProductoModel) {
-    return item.id;
+    // Oculta la alerta después de 2 segundos
+    setTimeout(() => {
+      this.mensajeAgregado[producto.id] = false;
+    }, 2000);
   }
 }

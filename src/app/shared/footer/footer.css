@@ -1,5 +1,56 @@
-footer {
-  background-color: #dfdfdf; 
-  border: 10px 0 0 0 solid black;
-  margin-top: 40px;
+/* Fondo y espaciado */
+.footer-principal {
+  background-color: #f1f1f1;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+/* Enlaces del menú del footer */
+.footer-link {
+  color: #189532;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+}
+
+.footer-link:hover {
+  color: #48e06b;
+  
+}
+
+/* Texto general */
+.footer-text {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+/* Links legales: términos y privacidad */
+.footer-legal-link {
+  color: #6c757d;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-legal-link:hover {
+  color: #189532;
+  text-decoration: underline;
+}
+.pipe {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 767.98px) {
+  .footer-principal .navbar-nav {
+    justify-content: center;
+  }
+
+  .footer-principal ul {
+    padding-left: 0;
+  }
+
+  .footer-principal .nav-item {
+    padding: 0 0.5rem;
+  }
 }

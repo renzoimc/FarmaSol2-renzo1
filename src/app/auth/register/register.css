@@ -1,0 +1,101 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: url('/banner/fondo-login2.jpg') no-repeat center center fixed;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Contenedor principal del formulario */
+.container {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
+}
+
+/* Título principal */
+h2 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Tarjetas de secciones */
+.card {
+  border: none;
+  border-radius: 0.75rem;
+}
+
+.card-header {
+  font-weight: bold;
+  background-color: #f8f9fa;
+}
+
+/* Campos de formulario */
+.form-label {
+  font-weight: 500;
+}
+
+input.form-control,
+select.form-select {
+  border-radius: 0.5rem;
+}
+
+/* Botón registrar */
+button.btn-success {
+  background-color: #189532;
+  border: none;
+  font-weight: 600;
+}
+
+button.btn-success:hover {
+  background-color: #106423;
+}
+
+/* Checkbox de términos y condiciones */
+.terminos-check {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.terminos-check input[type="checkbox"] {
+  margin-right: 0.5rem;
+  accent-color: #189532;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* Enlaces de términos y privacidad */
+.link-legal {
+  text-decoration: none;
+  color: #189532;
+  font-weight: 500;
+}
+
+.link-legal:hover {
+  text-decoration: underline;
+  color: #106423;
+}
+
+/* Mensaje de error si no se aceptan términos */
+.text-danger-small {
+  font-size: 0.85rem;
+  color: #dc3545;
+  margin-top: 0.25rem;
+}
+
+/* Responsivo */
+@media (max-width: 576px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+}

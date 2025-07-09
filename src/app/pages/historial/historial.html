@@ -1,0 +1,51 @@
+<div class="container py-5">
+  <h3 class="mb-4 text-center" style="color: #566d62;">Historial de pedidos de {{ usuario?.nombre }}</h3>
+
+  <div *ngIf="pedidos.length === 0" class="alert alert-info text-center">
+    No tienes pedidos registrados aún.
+  </div>
+
+  <div *ngFor="let pedido of pedidos" class="card mb-4 shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span>Pedido #{{ pedido.codigoPedido }}</span>
+      <span class="badge bg-success">{{ pedido.estado || 'Entregado' }}</span>
+    </div>
+
+    <div class="card-body">
+      <p><strong>Fecha del pedido:</strong> {{ pedido.fecha }}</p>
+      <p><strong>Nombre:</strong> {{ pedido.nombre }} {{ pedido.apellido }}</p>
+      <p><strong>Dirección:</strong> {{ pedido.direccion }}</p>
+      <p><strong>Distrito:</strong> {{ pedido.distrito }}</p>
+      <p><strong>Departamento:</strong> {{ pedido.departamento }}</p>
+      <p><strong>Método de envío:</strong> {{ pedido.metodoEnvio === 'domicilio' ? 'Envío a domicilio' : 'Retiro en tienda' }}</p>
+      <p><strong>Tiempo estimado:</strong> {{ pedido.tiempoEstimado }}</p>
+      <p><strong>Método de pago:</strong> {{
+        pedido.metodo === 'contra' ? 'Pago contra entrega' :
+        pedido.wallet === 'yape' ? 'Yape' :
+        pedido.wallet === 'plin' ? 'Plin' : 'Tarjeta'
+      }}</p>
+
+      <div class="mt-3">
+        <p class="fw-bold">Productos:</p>
+        <ul class="list-group">
+          <li *ngFor="let item of pedido.carrito" class="list-group-item d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <img [src]="'/img/' + item.producto.imagen" alt="{{ item.producto.nombre }}" class="me-3 rounded" style="width: 50px; height: 50px; object-fit: cover;">
+              <div>
+                <strong>{{ item.producto.nombre }}</strong>
+                <div><small>Cantidad: {{ item.cantidad }}</small></div>
+              </div>
+            </div>
+            <span>S/. {{ (item.producto.precio * item.cantidad) | number:'1.2-2' }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-3 text-end">
+        <p><strong>Subtotal:</strong> S/ {{ pedido.subtotal | number:'1.2-2' }}</p>
+        <p><strong>Costo de envío:</strong> S/ {{ pedido.costoEnvio | number:'1.2-2' }}</p>
+        <h5><strong>Total pagado:</strong> S/ {{ pedido.total | number:'1.2-2' }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

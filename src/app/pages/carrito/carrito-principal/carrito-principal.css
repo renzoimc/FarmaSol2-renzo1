@@ -1,13 +1,56 @@
-.title-page-container{
-    height: 150px;
+.title-page-container {
+    position: relative;
+    height: 160px;
     width: 100%;
     background-image: url("../../../../../public/img/bg-title.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
-.title-page-container h2{
-    font-weight: 700;
-    color: white;
+
+
+.title-page-container h2 {
+    position: relative;
+    z-index: 2;
+    font-weight: 800;
+    font-size: 2.1rem;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+
+/* ----- Encabezados de tabla ----- */
+.table thead th {
+  color: #1f8a4c;
+  font-weight: 700;
+}
+
+/* ----- Nombre y precio del producto ----- */
+td.fw-semibold,
+td:nth-child(3),
+td:nth-child(5) {
+  color: #525252;
+}
+
+/* ----- Botones de cantidad ----- */
+.btn-outline-dark {
+  border-color: #1f8a4c;
+  color: #1f8a4c;
+  transition: background-color 0.3s, color 0.3s;
+}
+.btn-outline-dark:hover {
+  background-color: #1f8a4c;
+  color: white;
+}
+
+/* ----- Botón eliminar ----- */
+.btn-outline-danger i {
+  font-size: 1rem;
 }

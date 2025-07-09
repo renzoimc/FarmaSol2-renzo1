@@ -1,46 +1,96 @@
-<!-- Solo muestra el contenido si el resumen existe -->
-<div class="container py-5" *ngIf="resumen">
-  <!-- Mensaje de confirmación -->
-  <h2 class="mb-3">¡Gracias por tu compra!</h2>
-  <p class="text-success">Tu pedido ha sido recibido y confirmado correctamente.</p>
-
-  <!-- Código de pedido generado -->
-  <div class="mb-3"><strong>Código de pedido:</strong> #{{ resumen.codigoPedido }}</div>
+<div class="container py-5">
+  <!-- Confirmación de orden -->
+  <div class="text-center mb-5">
+    <h3 class="text-success fw-bold">¡Gracias {{ usuario?.nombre }}!</h3>
+    <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+    <p class="mt-2 fs-5">Tu pedido <strong>#{{ resumen.codigoPedido }}</strong> ha sido recibido exitosamente.</p>
+  </div>
 
   <div class="row">
-    <!-- Columna izquierda: detalles del cliente y envío -->
-    <div class="col-md-7">
-      <div class="mb-2"><strong>Cliente:</strong> {{ resumen.nombre }} {{ resumen.apellido }}</div>
-      <div class="mb-2"><strong>Dirección:</strong> {{ resumen.direccion }}</div>
-      <div class="mb-2"><strong>Tiempo estimado:</strong> {{ resumen.tiempoEstimado }}</div>
-      <div class="mb-2"><strong>Método de pago:</strong> {{ descripcionMetodoPago }}</div>
-      <div class="mb-4"><strong>Items:</strong> {{ cantidadItems }} productos</div>
+    <!-- Columna izquierda -->
+    <div class="col-md-6 mb-4">
+      <!-- Información del cliente -->
+      <div class="card shadow mb-4">
+        <div class="card-header bg-light"><strong>Información del cliente</strong></div>
+        <div class="card-body">
+          <p><strong>Nombre:</strong> {{ resumen.nombre }} {{ resumen.apellido }}</p>
+          <p><strong>Dirección:</strong> {{ resumen.direccion }}</p>
+          <p><strong>Distrito:</strong> {{ usuario?.distrito }}</p>
+          <p><strong>Departamento:</strong> {{ usuario?.departamento }}</p>
+          <p><strong>Método de envío:</strong>
+            {{
+              resumen.metodoEnvio === 'domicilio'
+                ? 'Envío a domicilio'
+                : 'Retiro en farmacia'
+            }}
+          </p>
+          <p><strong>Tiempo estimado:</strong> {{ resumen.tiempoEstimado }}</p>
+        </div>
+      </div>
+
+      <!-- Método de pago -->
+      <div class="card shadow">
+        <div class="card-header bg-light"><strong>Método de pago</strong></div>
+        <div class="card-body">
+          <p>
+            <strong>Tipo:</strong>
+            {{
+              resumen.metodo === 'contra'
+                ? 'Pago contra entrega'
+                : resumen.wallet === 'yape'
+                  ? 'Yape'
+                  : resumen.wallet === 'plin'
+                    ? 'Plin'
+                    : 'Tarjeta'
+            }}
+          </p>
+        </div>
+      </div>
     </div>
 
-    <!-- Columna derecha: boleta de compra -->
-    <div class="col-md-5">
-      <div class="card shadow-sm">
-        <div class="card-header bg-light fw-bold">Boleta de compra</div>
-        <ul class="list-group list-group-flush">
-          <!-- Listado de productos -->
-          <li *ngFor="let item of resumen.carrito" class="list-group-item d-flex justify-content-between">
-            {{ item.producto.nombre }} x{{ item.cantidad }}
-            <span>S/ {{ (item.producto.precio * item.cantidad) | number: '1.2-2' }}</span>
-          </li>
+    <!-- Columna derecha -->
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-light"><strong>Resumen de compra</strong></div>
+        <div class="card-body">
+          <!-- Productos -->
+          <div *ngFor="let item of resumen.carrito" class="d-flex align-items-center justify-content-between mb-3 border-bottom pb-2">
+            <div class="d-flex align-items-center">
+              <img [src]="'/img/' + item.producto.imagen" alt="{{ item.producto.nombre }}" class="me-3 rounded" style="width: 60px; height: 60px; object-fit: cover;">
+              <div>
+                <strong>{{ item.producto.nombre }}</strong><br>
+                <small>Cantidad: {{ item.cantidad }}</small>
+              </div>
+            </div>
+            <div class="text-end">
+              <span>S/ {{ item.producto.precio | number:'1.2-2' }}</span>
+            </div>
+          </div>
 
-          <!-- Subtotal, envío y total -->
-          <li class="list-group-item d-flex justify-content-between">
-            Subtotal: <span>S/ {{ resumen.subtotal | number: '1.2-2' }}</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            Envío:
-            <span *ngIf="resumen.costoEnvio === 0">Gratis</span>
-            <span *ngIf="resumen.costoEnvio > 0">S/ {{ resumen.costoEnvio | number: '1.2-2' }}</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between fw-bold">
-            Total: <span>S/ {{ resumen.total | number: '1.2-2' }}</span>
-          </li>
-        </ul>
+          <!-- Totales -->
+          <div class="mt-4">
+            <div class="d-flex justify-content-between">
+              <span><strong>Subtotal:</strong></span>
+              <span>S/ {{ resumen.subtotal | number:'1.2-2' }}</span>
+            </div>
+            <div class="d-flex justify-content-between" *ngIf="resumen.costoEnvio > 0">
+              <span><strong>Costo de envío:</strong></span>
+              <span>S/ {{ resumen.costoEnvio | number:'1.2-2' }}</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <h5><strong>Total pagado:</strong></h5>
+              <h5><strong>S/ {{ resumen.total | number:'1.2-2' }}</strong></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón seguir comprando -->
+      <div class="text-end mt-4">
+        <button class="btn btn-success btn-check-icon" (click)="irAlCatalogo()">
+          <i class="fas fa-shopping-bag me-2"></i> Seguir comprando
+        </button>
       </div>
     </div>
   </div>

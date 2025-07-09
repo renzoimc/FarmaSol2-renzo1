@@ -1,0 +1,80 @@
+/* Título */
+.titulo-pago {
+  color: #1f8a4c;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+/* Botón volver */
+.btn-volver {
+  color: #1f8a4c;
+  border-color: #1f8a4c;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+.btn-volver:hover {
+  background-color: #1f8a4c;
+  color: white;
+}
+
+/* Métodos de pago */
+.btn-metodo {
+  border-color: #189532;
+  color: #189532;
+  transition: background-color 0.3s ease;
+}
+.btn-metodo:hover,
+.btn-check:checked + .btn-metodo {
+  background-color: #198754;
+  color: white;
+}
+
+/* Botón confirmar (todos los métodos) */
+.btn-confirmar {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  transition: all 0.3s ease;
+}
+.btn-confirmar:hover {
+  background-color: #218838;
+}
+
+/* Botones billeteras */
+.btn-wallet {
+  border-color: #1f8a4c;
+  color: #1f8a4c;
+  transition: background-color 0.3s ease;
+}
+.btn-wallet:hover,
+.btn-check:checked + .btn-wallet {
+  background-color: #1f8a4c;
+  color: white;
+}
+
+.wallet-btn {
+  border-color: #66bb6a;
+  color: #1b5e20;
+}
+.wallet-btn:hover {
+  background-color: #a5d6a7;
+  color: #0d3d17;
+}
+
+.btn-confirmar {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.btn-confirmar:hover {
+  background-color: #218838;
+}
+
+.alert-exito {
+  background-color: #e6f9ec;
+  color: #2e7d32;
+  border: 1px solid #b2dfdb;
+  font-size: 1rem;
+  text-align: center;
+}

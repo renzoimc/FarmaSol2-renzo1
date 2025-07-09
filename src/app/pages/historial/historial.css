@@ -1,0 +1,36 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+.card-header {
+  background-color: #198754; 
+  color: white;
+  font-weight: bold;
+}
+
+.card-body p {
+  margin-bottom: 0.5rem;
+}
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid #eee;
+}
+
+img {
+  border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+  .card-body p,
+  .list-group-item {
+    font-size: 14px;
+  }
+}

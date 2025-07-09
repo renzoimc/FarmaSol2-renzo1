@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class Contacto {
   contactoForm: FormGroup;
+  mensajeEnviado: boolean = false; // ✅ Para mostrar el alert visual de éxito
 
   constructor(private fb: FormBuilder) {
     this.contactoForm = this.fb.group({
@@ -25,17 +26,24 @@ export class Contacto {
   onSubmit() {
     if (this.contactoForm.valid) {
       console.log('Datos del formulario:', this.contactoForm.value);
-      alert('Formulario enviado con éxito');
+
+      // ✅ Mostramos el mensaje de éxito
+      this.mensajeEnviado = true;
+
+      // ✅ Ocultar luego de 4 segundos
+      setTimeout(() => {
+        this.mensajeEnviado = false;
+      }, 4000);
+
       // Aquí puedes agregar un POST al backend más adelante
     } else {
-      alert('Por favor, completa correctamente el formulario.');
       this.contactoForm.markAllAsTouched();
     }
 
     console.log('Datos del formulario:', {
-    ...this.contactoForm.value,
-    celular: '+51' + this.contactoForm.value.celular
-  });
+      ...this.contactoForm.value,
+      celular: '+51' + this.contactoForm.value.celular
+    });
   }
 
   esInvalido(campo: string): boolean {

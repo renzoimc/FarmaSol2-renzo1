@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
@@ -7,18 +6,15 @@ import { CarritoService } from '../../core/services/carrito';
 
 @Component({
   selector: 'app-pago',
-  standalone: true,               // <-- Asegura standalone
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './pago.html',
   styleUrl: './pago.css'
 })
 export class Pago implements OnInit {
-  // Variable pública para acceder desde pago.html
-  // Inyectar el servicio carritoService
   public carritoService = inject(CarritoService);
   private router = inject(Router);
 
-  // Datos del formulario de pago
   pago = {
     nombre: '',
     apellido: '',
@@ -26,79 +22,107 @@ export class Pago implements OnInit {
     expiracion: '',
     cvv: '',
     guardar: false,
-
-    // Campos nuevos para la selección de método
-    metodo: 'contra',  // valor por defecto
-    wallet: ''         // 'yape' o 'plin'
+    metodo: 'contra',
+    wallet: ''
   };
 
-  // Tipo de envío seleccionado y costo adicional
   tipoEnvio: string = '';
   costoEnvio: number = 0;
+  pagoExitoso: boolean = false; // ← NUEVO
 
-  // Al iniciar, obtenemos el tipo de envío desde localStorage
   ngOnInit(): void {
-    this.tipoEnvio = localStorage.getItem('tipoEnvio') || 'domicilio';
-    this.costoEnvio = this.tipoEnvio === 'domicilio' ? 2.50 : 0;
+    const datosEnvioStr = localStorage.getItem('datosEnvio');
+    
+    if (datosEnvioStr) {
+      const datosEnvio = JSON.parse(datosEnvioStr);
+      this.tipoEnvio = datosEnvio.metodoEnvio || 'domicilio';
+
+      // Calcular costo según distrito
+      if (this.tipoEnvio === 'domicilio') {
+        const distrito = datosEnvio.distrito?.toLowerCase() || '';
+        this.costoEnvio = distrito === 'carmen de la legua' ? 2.50 : 5.00;
+      } else {
+        this.costoEnvio = 0;
+      }
+    } else {
+      this.tipoEnvio = 'domicilio';
+      this.costoEnvio = 5.00;
+    }
   }
 
-  // Accedemos al arreglo del carrito usando el servicio
   get carrito() {
-    return this.carritoService.getCarrito(); // Devuelve el arreglo de productos desde el servicio
+    return this.carritoService.getCarrito();
   }
 
-  // Calculamos el subtotal sin envío
   get subtotal(): number {
     return this.carrito.reduce((acc, item) => acc + item.producto.precio * item.cantidad, 0);
   }
 
-  // Calculamos el total incluyendo costo de envío
   get total(): number {
     return this.subtotal + this.costoEnvio;
   }
 
-  // Proceso de pago
   pagar() {
-    // Validación si se usa billetera
     if (this.pago.metodo === 'wallet' && !this.pago.wallet) {
       alert('Por favor, selecciona Yape o Plin.');
       return;
     }
 
-    // Guardar resumen en localStorage para que esté disponible en pago-resumen
-    localStorage.setItem('pagoResumen', JSON.stringify({
+    const anioActual = new Date().getFullYear().toString();
+    const claveContador = `contadorPedidos_${anioActual}`;
+    let ultimoNumero = parseInt(localStorage.getItem(claveContador) || '0');
+    ultimoNumero++;
+    localStorage.setItem(claveContador, ultimoNumero.toString());
+    const codigoPedido = `${anioActual}-${ultimoNumero.toString().padStart(4, '0')}-FARMA`;
+
+    const usuarioData = localStorage.getItem('usuarioActivo');
+    const usuario = usuarioData ? JSON.parse(usuarioData) : null;
+
+    const resumen = {
       ...this.pago,
       metodoEnvio: this.tipoEnvio,
       costoEnvio: this.costoEnvio,
       total: this.total,
       subtotal: this.subtotal,
-      direccion: localStorage.getItem('direccion') || '',
-      tiempoEstimado: this.tipoEnvio === 'domicilio' ? '2 días' : '1 día',
       carrito: this.carrito,
-      codigoPedido: Math.floor(100000 + Math.random() * 900000) // Código de 6 dígitos
-    }));
+      codigoPedido,
+      tiempoEstimado: this.tipoEnvio === 'domicilio' ? '2 días' : '1 día',
+      fecha: new Date().toLocaleString(),
+      nombre: usuario?.nombre || '',
+      apellido: usuario?.apellido || '',
+      direccion: usuario?.direccion || localStorage.getItem('direccion') || ''
+    };
 
-    alert('¡Pago procesado correctamente!');
+    localStorage.setItem('pagoResumen', JSON.stringify(resumen));
 
-    // Limpiar tipo de envío si deseas
-    localStorage.removeItem('tipoEnvio');
+    const email = usuario?.email || 'invitado@farmasol.com';
+    const historial = JSON.parse(localStorage.getItem('historialPedidos') || '{}');
+    if (!historial[email]) historial[email] = [];
+    historial[email].push(resumen);
+    localStorage.setItem('historialPedidos', JSON.stringify(historial));
 
-    // Navegar al resumen
-    this.router.navigate(['/pago-resumen']);
+    // Mostrar alerta visual
+    this.pagoExitoso = true;
+
+    // Vaciar carrito y limpiar datos
+    this.carritoService.vaciarCarrito();
+    localStorage.removeItem('datosEnvio');
+
+    // Oculta el mensaje y redirige después de 1.5 segundos
+    setTimeout(() => {
+      this.pagoExitoso = false;
+      this.router.navigate(['/pago-resumen']);
+    }, 1500);
   }
 
-  // Formatea MM/AA
   formatearFechaExpiracion(event: any) {
-    let input = event.target.value.replace(/\D/g, ''); // Eliminar todo lo que no sea dígito
-
+    let input = event.target.value.replace(/\D/g, '');
     if (input.length >= 2) {
       input = input.substring(0, 2) + '/' + input.substring(2, 4);
     }
-
     this.pago.expiracion = input;
   }
 
-  // Botón volver a la pantalla anterior
   volver(): void {
     this.router.navigate(['/envio']);
   }

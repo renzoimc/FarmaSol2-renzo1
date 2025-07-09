@@ -45,6 +45,6 @@ export class EnvioService {
     }
 
     // Por defecto
-    return 5.00;
+    return 0.00;
   }
 }

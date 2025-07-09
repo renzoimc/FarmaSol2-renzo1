@@ -1,10 +1,155 @@
-.main-preheader{
-    background-color: #189532;
+/* Preheader */
+.main-preheader {
+  background-color: #189532;
 }
+
+/* Navegación principal */
 .navbar-nav .nav-link {
-    color: #1f1f1f;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6c757d;
 }
+.navbar-nav .nav-link:hover {
+  color: #3ecd53;
+}
+
 .navbar-nav .divider {
-    color: #6c757d;
-    margin: 0 0.25rem;
+  color: #6c757d;
+  margin: 0 0.25rem;
+}
+
+.btn-login-custom {
+  border: 2px solid #189532;
+  color: #189532;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login-custom:hover {
+  background-color: #189532;
+  color: white;
+}
+
+/* Íconos: lupa y carrito */
+.icono-busqueda {
+  color: #189532;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+}
+
+.icono-busqueda:hover {
+  color: #106423;
+}
+
+.icono-carrito {
+  color: #f1ce32;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.icono-carrito:hover {
+  color: #eca24f;
+}
+
+/* Usuario avatar */
+.avatar-usuario {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #189532;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Nombre usuario dropdown */
+.nombre-usuario {
+  font-weight: 600;
+  color: #6c757d;
+  transition: color 0.3s ease;
+}
+
+.nombre-usuario:hover {
+  color: #189532;
+}
+
+/* Dropdown: mis pedidos */
+.item-mis-pedidos {
+  font-weight: 500;
+  color: #343a40;
+}
+
+.item-mis-pedidos:hover {
+  background-color: #f8f9fa;
+}
+
+.icono-mis-pedidos {
+  color: #189532;
+}
+
+/* Botón hamburguesa */
+.navbar-toggler {
+  border: none;
+  background: none;
+  font-size: 1.25rem;
+  padding: 0.25rem 0.5rem;
+}
+
+/* Responsive: ajustar colapsable a la derecha */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    text-align: right;
+  }
+
+  .navbar-nav {
+    align-items: flex-end;
+  }
+
+  .navbar-nav .divider {
+    display: none;
+  }
+
+  .navbar-nav .nav-item {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar-nav .nav-item {
+    margin-bottom: 0;
+  }
+}
+
+
+/* Estilo para el collapse (responsive menu) */
+@media (max-width: 991.98px) {
+  #menuPrincipal {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    z-index: 1000;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    width: max-content;
+    min-width: 180px;
+  }
+
+  #menuPrincipal .navbar-nav {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  #menuPrincipal .nav-item {
+    margin-bottom: 0.5rem;
+  }
+
+  #menuPrincipal .divider {
+    display: none;
+  }
 }

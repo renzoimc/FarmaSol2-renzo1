@@ -3,91 +3,110 @@
   <div class="mb-5 title-page-container d-flex justify-content-center align-items-center">
     <h2 class="mb-0">Mi carrito</h2>
   </div>
-  <div class="container mt-3">
-    <div class="row">
-      <!-- contenido del carrito -->
-      <div class="col-sm-9"> 
-        <div class="card">
-          <div class="card-body">
-            <div class="table-responsive">
-              <!-- Tabla que muestra la lista de productos en el carrito -->
-              <table class="table table-bordered table-striped text-center">
-                <thead>
-                  <tr>
-                    <!-- Encabezados de la tabla -->
-                    <th>Producto</th>
-                    <th>Imagen</th>
-                    <th>Precio (S/.)</th>
-                    <th>Cantidad</th>
-                    <th>Importe</th>
-                    <th>Accion</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Iteración sobre cada producto del carrito -->
-                  @for (item of listCarrito; track item.producto) {
+
+    <div class="container mt-3">
+      <div class="row">
+        <!-- contenido del carrito -->
+        <div class="col-sm-9"> 
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <div class="table-responsive">
+                <!-- Tabla que muestra la lista de productos en el carrito -->
+                <table class="table table-bordered table-striped text-center align-middle">
+                  <thead class="table-light">
                     <tr>
-                      <!-- Nombre del producto -->
-                      <td>{{item.producto.nombre}}</td>
-                      <td>
+                      <!-- Encabezados de la tabla -->
+                      <th>Producto</th>
+                      <th>Imagen</th>
+                      <th>Precio (S/.)</th>
+                      <th>Cantidad</th>
+                      <th>Importe</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Iteración sobre cada producto del carrito -->
+                    @for (item of listCarrito; track item.producto) {
+                      <tr>
+                        <!-- Nombre del producto -->
+                        <td class="fw-semibold">{{ item.producto.nombre }}</td>
+
                         <!-- Imagen del producto -->
-                        <img [src]="'/img/' + item.producto.imagen" width="50" height="60">
-                      </td>
-                      <!-- Precio unitario formateado -->
-                      <td>{{item.producto.precio  | number: '1.2-2'}}</td>
-                      <td>
+                        <td>
+                          <img [src]="'/img/' + item.producto.imagen" width="60" height="60" class="rounded border">
+                        </td>
+
+                        <!-- Precio unitario formateado -->
+                        <td>S/ {{ item.producto.precio | number: '1.2-2' }}</td>
+
                         <!-- Botones + y - para modificar cantidad -->
-                        <div class="d-flex justify-content-center align-items-center gap-2">
-                          <button class="btn btn-sm btn-outline-secondary" (click)="cambiarCantidad(item, -1, $index)" [disabled]="item.cantidad <= 1">-</button>
-                          <span>{{ item.cantidad }}</span>
-                          <button class="btn btn-sm btn-outline-secondary" (click)="cambiarCantidad(item, 1, $index)">+</button>
-                        </div>
-                      </td>
-                      <!-- Muestra el importe  formateado -->
-                      <td>{{(item.producto.precio * item.cantidad) | number: '1.2-2'}}</td> 
-                      <td>
+                        <td>
+                          <div class="d-flex justify-content-center align-items-center gap-2">
+                            <button class="btn btn-sm btn-outline-dark" 
+                                    (click)="cambiarCantidad(item, -1, $index)" 
+                                    [disabled]="item.cantidad <= 1">−</button>
+                            <span>{{ item.cantidad }}</span>
+                            <button class="btn btn-sm btn-outline-dark" 
+                                    (click)="cambiarCantidad(item, 1, $index)">+</button>
+                          </div>
+                        </td>
+
+                        <!-- Muestra el importe  formateado -->
+                        <td>S/ {{ (item.producto.precio * item.cantidad) | number: '1.2-2' }}</td>
+
                         <!-- Botón para eliminar el producto del carrito -->
-                        <button (click)="eliminarItem($index)" type="button" class="btn btn-danger btn-sm">
-                          <i class="fa fa-trash"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  }
-                  <!-- Si el carrito está vacío, se muestra un mensaje -->
-                  @if (listCarrito.length == 0) {
-                    <tr>
-                      <td colspan="6" class="text-center">Tu carrito está vacio</td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Sección de Resumen de Compra (pago) -->
-      <div class="col-sm-3">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-              <!-- Título del resumen -->
-              <h5>Resumen de Compra</h5>
-              <hr>
-              <!-- Muestra el total de la compra calculado por el servicio -->
-              <div class="d-flex justify-content-between mb-4">
-                <p class="mb-2">Total</p>
-                <p class="mb-2">S/{{carritoService.total() | number: '1.2-2'}}</p>
+                        <td>
+                          <button (click)="eliminarItem($index)" 
+                                  type="button" 
+                                  class="btn btn-outline-danger btn-sm">
+                            <i class="fa fa-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    }
+
+                    <!-- Si el carrito está vacío, se muestra un mensaje -->
+                    @if (listCarrito.length == 0) {
+                      <tr>
+                        <td colspan="6" class="text-center">Tu carrito está vacío</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
               </div>
-              <!-- Botón para proceder a la compra; y se deshabilita si el carrito está vacío -->
-              <button (click)="continuarCompra()" [disabled]="listCarrito.length == 0" type="button" class="btn btn-success btn-block btn-ig">
-                <div class="d-flex justify-content-center">
-                  <span>Ir a comprar</span>
-                </div>
-              </button>
             </div>
           </div>
         </div>
-      </div>
+
+        <!-- Sección de Resumen de Compra (pago) -->
+        <div class="col-sm-3">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <div class="row">
+                <!-- Título del resumen -->
+                <h5 class="fw-bold">Resumen de Compra</h5>
+                <hr>
+
+                <!-- Muestra el total de la compra calculado por el servicio -->
+                <div class="d-flex justify-content-between mb-4">
+                  <p class="mb-2">Total</p>
+                  <p class="mb-2">S/ {{ carritoService.total() | number: '1.2-2' }}</p>
+                </div>
+
+                <!-- Botón para proceder a la compra; se desactiva si el carrito está vacío -->
+                <button (click)="continuarCompra()" 
+                        [disabled]="listCarrito.length == 0" 
+                        type="button" 
+                        class="btn btn-success w-100">
+                  <div class="d-flex justify-content-center">
+                    <span>Ir a comprar</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
 </div>

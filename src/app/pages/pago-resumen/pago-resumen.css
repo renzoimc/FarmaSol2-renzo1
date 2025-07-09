@@ -1,0 +1,14 @@
+.btn-check-icon {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-check-icon:hover {
+  background-color: #218838; 
+  border-color: #1e7e34;
+}

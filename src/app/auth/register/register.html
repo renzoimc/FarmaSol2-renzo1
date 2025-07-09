@@ -1,0 +1,152 @@
+<!-- CONTENEDOR GENERAL SOBRE EL FONDO -->
+<div class="container p-4 rounded shadow-lg" style="max-width: 720px; background: rgba(255, 255, 255, 0.94);">
+
+  <!-- Botón Volver -->
+  <div class="d-flex justify-content-start mb-2">
+    <button class="btn btn-sm text-dark" (click)="volver()" style="font-weight: bold;">
+      <i class="fas fa-arrow-left me-2 text-success"></i> Volver al inicio de sesión
+    </button>
+  </div>
+
+  <!-- Título -->
+  <h2 class="mb-3 text-center" style="font-weight: 700;">
+    <i class="fas fa-user-plus me-2" style="color: #189532;"></i>
+    {{ modoInvitado ? 'Completa tus datos para continuar' : 'Crea tu cuenta en' }}
+    <span style="color: #189532;">Farma</span><span style="color: #dc3545;">Sol</span>
+  </h2>
+
+  <!-- FORMULARIO COMPLETO -->
+  <div class="w-100">
+
+    <!-- DATOS PERSONALES -->
+    <div class="card mb-3 shadow-sm">
+      <div class="card-header bg-light fw-bold">Datos personales</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombres *</label>
+          <input id="nombre" type="text" class="form-control" [(ngModel)]="nombre" required />
+        </div>
+        <div class="mb-3">
+          <label for="apellido" class="form-label">Apellidos *</label>
+          <input id="apellido" type="text" class="form-control" [(ngModel)]="apellido" required />
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono (opcional)</label>
+          <input id="telefono" type="text" class="form-control" [(ngModel)]="telefono" />
+        </div>
+        <div class="mb-3">
+          <label for="celular" class="form-label">Celular *</label>
+          <input id="celular" type="text" class="form-control" [(ngModel)]="celular" (blur)="celularTocado = true" maxlength="9" />
+          <div *ngIf="celularTocado && celular.length > 0 && celular.length < 9" class="form-text text-danger">
+            El celular debe tener 9 dígitos.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico *</label>
+          <input id="email" type="email" class="form-control" [(ngModel)]="email" placeholder="usuario@farma.com" required />
+        </div>
+
+        <!-- CONTRASEÑAS: solo para usuarios normales -->
+        <div *ngIf="!modoInvitado">
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <div class="input-group">
+              <input [type]="mostrarPassword ? 'text' : 'password'" class="form-control" id="password" [(ngModel)]="password" minlength="7" required />
+              <button type="button" class="btn btn-outline-secondary" (click)="mostrarPassword = !mostrarPassword" title="Mostrar/Ocultar contraseña">
+                <i [ngClass]="mostrarPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+              </button>
+            </div>
+            <div class="form-text text-danger" *ngIf="password && password.length < 7">
+              La contraseña debe tener mínimo 7 caracteres.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="confirmarPassword" class="form-label">Confirmar contraseña</label>
+            <div class="input-group">
+              <input [type]="mostrarConfirmPassword ? 'text' : 'password'" class="form-control" id="confirmarPassword" [(ngModel)]="confirmarPassword" required />
+              <button type="button" class="btn btn-outline-secondary" (click)="mostrarConfirmPassword = !mostrarConfirmPassword" title="Mostrar/Ocultar contraseña">
+                <i [ngClass]="mostrarConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+              </button>
+            </div>
+            <div class="form-text text-danger" *ngIf="confirmarPassword && password !== confirmarPassword">
+              Las contraseñas no coinciden.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTO DE IDENTIDAD -->
+    <div class="card mb-3 shadow-sm">
+      <div class="card-header bg-light fw-bold">Documento de identidad</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="tipoDocumento" class="form-label">Tipo de documento *</label>
+          <select id="tipoDocumento" class="form-select" [(ngModel)]="tipoDocumento" required>
+            <option value="" disabled selected>Seleccione una opción</option>
+            <option value="DNI">DNI</option>
+            <option value="Carnet de Extranjería">Carnet de Extranjería</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="numeroDocumento" class="form-label">Número de documento *</label>
+          <input id="numeroDocumento" type="text" class="form-control" [(ngModel)]="numeroDocumento"
+                 [maxLength]="tipoDocumento === 'DNI' ? 8 : 20" required />
+          <div *ngIf="tipoDocumento === 'DNI' && numeroDocumento.length > 0 && numeroDocumento.length < 8"
+               class="form-text text-danger">
+            El DNI debe tener 8 dígitos.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIRECCIÓN DE ENVÍO -->
+    <div class="card mb-3 shadow-sm">
+      <div class="card-header bg-light fw-bold">Dirección de envío</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="direccion" class="form-label">Dirección *</label>
+          <input id="direccion" type="text" class="form-control" [(ngModel)]="direccion" required />
+        </div>
+        <div class="mb-3">
+          <label for="departamento" class="form-label">Departamento *</label>
+          <input id="departamento" type="text" class="form-control" [(ngModel)]="departamento" required />
+        </div>
+        <div class="mb-3">
+          <label for="distrito" class="form-label">Distrito *</label>
+          <input id="distrito" type="text" class="form-control" [(ngModel)]="distrito" required />
+        </div>
+        <div class="mb-3">
+          <label for="codigoZip" class="form-label">Código Zip</label>
+          <input id="codigoZip" type="text" class="form-control" [(ngModel)]="codigoZip" />
+        </div>
+        <div class="mb-3">
+          <label for="referencia" class="form-label">Referencia</label>
+          <input id="referencia" type="text" class="form-control" [(ngModel)]="referencia" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ACEPTACIÓN DE TÉRMINOS Y POLÍTICA -->
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="terminosAceptados" [(ngModel)]="terminosAceptados" required>
+      <label class="form-check-label" for="terminosAceptados">
+        Acepto los 
+        <a href="/terminos-condiciones" target="_blank" class="enlace-legales">Términos y Condiciones</a> y la 
+        <a href="/politica-privacidad" target="_blank" class="enlace-legales">Política de Privacidad</a>.
+      </label>
+    </div>
+
+    
+
+    <!-- BOTÓN REGISTRAR -->
+    <div class="text-end">
+      <button class="btn btn-success px-4 py-2" (click)="validarTerminos()">
+        {{ modoInvitado ? 'Continuar' : 'Registrarme' }}
+      </button>
+    </div>
+
+  </div>
+</div>
+

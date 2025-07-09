@@ -7,15 +7,29 @@
   <div class="row">
     <!-- Columna izquierda: Datos de contacto + Mapa -->
     <div class="col-md-5 mb-4">
-      <h5>Farma De A Sol</h5>
-      <p><strong>Dirección:</strong>Av. José Santos Chocano 107 Carmen de la Legua-Reynoso, Callao</p>
-      <p><strong>Teléfono:</strong> +51 923 626 053</p>
-      <p><strong>Correo:</strong> contacto&#64;farmadeasol.com</p>
-      <p><strong>Horario:</strong> 24/7 - Siempre disponibles para ti</p>
+
+      <h5 class="titulo-verde mb-4"><i class="bi bi-building"></i> Farma De A Sol</h5>
+
+        <p class="contacto-info">
+          <i class="bi bi-geo-alt-fill me-2 icono-verde"></i>
+          <span class="contacto-label">Dirección:</span> Av. José Santos Chocano 107 Carmen de la Legua-Reynoso, Callao
+        </p>
+        <p class="contacto-info">
+          <i class="bi bi-telephone-fill me-2 icono-verde"></i>
+          <span class="contacto-label">Teléfono:</span> +51 923 626 053
+        </p>
+        <p class="contacto-info">
+          <i class="bi bi-envelope-fill me-2 icono-verde"></i>
+          <span class="contacto-label">Correo:</span> contacto&#64;farmadeasol.com
+        </p>
+        <p class="contacto-info">
+          <i class="bi bi-clock-fill me-2 icono-verde"></i>
+          <span class="contacto-label">Horario:</span> 24/7 - Siempre disponibles para ti
+        </p>
 
       <!-- Imagen del mapa -->
       <div class="container mt-4">
-  <h2 class="mb-3">Encuéntranos</h2>
+ <h5 class="titulo-verde mt-4"><i class="bi bi-geo-fill me-2"></i> Encuéntranos</h5>
 
   <div class="ratio ratio-4x3 rounded shadow">
     <iframe 
@@ -100,6 +114,12 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Enviar</button>
+
+        <!-- ALERTA de éxito -->
+        <div *ngIf="mensajeEnviado" class="alert alert-exito d-flex align-items-center mt-3" role="alert">
+          <i class="fas fa-check-circle me-2"></i>
+          Tu mensaje fue enviado correctamente. ¡Gracias por contactarnos!
+        </div>
       </form>
 
 

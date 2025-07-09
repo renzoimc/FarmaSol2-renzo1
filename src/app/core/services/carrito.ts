@@ -77,4 +77,9 @@ export class CarritoService {
       }
     }
   }
+
+  vaciarCarrito() {
+    this.listCarrito = [];
+    localStorage.removeItem('carrito');
+  }
 }

@@ -1,24 +1,32 @@
-<footer class="text-white pt-3 pb-2 ">
-  <div class="container d-flex justify-content-between align-items-center">
-    <!-- Logo a la izquierda -->
-    <img src="/img/farmasol.png" alt="Logo Farmasol" class="img-fluid" style="max-height: 60px;" />
-    
-    <!-- Navegación centrada -->
-    <ul class="navbar-nav flex-row">
-      <li class="nav-item px-3">
-        <a class="nav-link text-black" routerLink="productos">Catálogo</a>
+<footer class="footer-principal pt-4 pb-3">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+
+    <!-- Logo -->
+    <div class="mb-3 mb-md-0">
+      <img src="/img/farmasol.png" alt="Logo Farmasol" class="img-fluid" style="max-height: 60px;" />
+    </div>
+
+    <!-- Navegación -->
+    <ul class="navbar-nav flex-row mb-3 mb-md-0">
+      <li class="nav-item px-2">
+        <a class="nav-link footer-link" routerLink="productos">Catálogo</a>
       </li>
-      <li class="nav-item px-3">
-        <a class="nav-link text-black" routerLink="nosotros">Nosotros</a>
+      <li class="nav-item px-2">
+        <a class="nav-link footer-link" routerLink="nosotros">Nosotros</a>
       </li>
-      <li class="nav-item px-3">
-        <a class="nav-link text-black" routerLink="contacto">Contacto</a>
+      <li class="nav-item px-2">
+        <a class="nav-link footer-link" routerLink="contacto">Contacto</a>
       </li>
     </ul>
   </div>
 
-  <!-- Copyright centrado -->
-<div class="container text-center mt-2 text-black">
-  <small>&copy; 2025 Farmasol. Todos los derechos reservados.</small>
-</div>
+  <!-- Derechos y links legales -->
+  <div class="container text-center mt-2">
+    <small class="footer-text">&copy; 2025 Farmasol. &nbsp;|&nbsp;Todos los derechos reservados. </small>
+    <br class="d-md-none" />
+    <small>
+      <a class="pipe">&nbsp;|&nbsp;</a><a routerLink="/terminos-condiciones" class="footer-legal-link">Términos y Condiciones</a>
+      <a class="pipe">&nbsp;|&nbsp;</a><a routerLink="/politica-privacidad" class="footer-legal-link">Política de Privacidad</a>
+    </small>
+  </div>
 </footer>

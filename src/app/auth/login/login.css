@@ -1,0 +1,48 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: url('/banner/fondo-login.jpg') no-repeat center center fixed;
+  background-size: cover;
+  justify-content: center;
+  align-items: center; 
+  padding: 2rem; 
+}
+
+/* Botón Iniciar sesión */
+.btn-iniciar {
+  background-color: #189532;
+  border-color: #189532;
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.btn-iniciar:hover {
+  background-color: #1C5925;
+}
+
+/* Botón Registrarme */
+.btn-registrar {
+  background-color: #6CD94E;
+  border-color: #6CD94E;
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.btn-registrar:hover {
+  background-color: #2EA640;
+}
+
+/* Botón Invitado */
+.btn-invitado {
+ 
+  border-color: #91DB7F;
+  color: #91DB7F;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+.btn-invitado:hover {
+  background-color: #0CE86C;
+   border-color: #0CE86C;
+   color: #fff;
+}

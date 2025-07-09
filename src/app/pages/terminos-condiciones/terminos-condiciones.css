@@ -1,0 +1,23 @@
+h2 {
+  font-weight: bold;
+  border-bottom: 2px solid #189532;
+  padding-bottom: 0.5rem;
+}
+
+h4 {
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+a {
+  color: #189532;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #106423;
+}

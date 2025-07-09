@@ -1,0 +1,74 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow p-4" style="max-width: 500px; width: 100%;">
+    <h4 class="text-center mb-4">Bienvenido a FarmaSol</h4>
+
+    <!-- Formulario de inicio de sesión -->
+    <form #form="ngForm" (ngSubmit)="iniciarSesion()">
+  <!-- Campo de correo electrónico -->
+  <div class="mb-3">
+    <input
+      id="emailLogin"
+      type="email"
+      class="form-control"
+      name="email"
+      placeholder="Correo electrónico"
+      [(ngModel)]="email"
+      required
+      email
+      #emailInput="ngModel"
+    />
+    <div class="text-danger mt-1" *ngIf="emailInput.invalid && emailInput.touched">
+      <small *ngIf="emailInput.errors?.['required']">Este campo es obligatorio.</small>
+      <small *ngIf="emailInput.errors?.['email']">Formato inválido.</small>
+    </div>
+  </div>
+
+  <!-- Campo de contraseña -->
+  <div class="mb-3">
+    <input
+      id="passwordLogin"
+      type="password"
+      class="form-control"
+      name="password"
+      placeholder="Contraseña"
+      [(ngModel)]="password"
+      required
+      minlength="7"
+      #passwordInput="ngModel"
+    />
+    <div class="text-danger mt-1" *ngIf="passwordInput.invalid && passwordInput.touched">
+      <small *ngIf="passwordInput.errors?.['required']">Este campo es obligatorio.</small>
+      <small *ngIf="passwordInput.errors?.['minlength']">Debe tener al menos 7 caracteres.</small>
+    </div>
+  </div>
+
+    <!-- CAPTCHA solo para iniciar sesión -->
+    <div class="mb-3">
+      <div class="g-recaptcha" data-sitekey="6LcI13wrAAAAAHTn5a5OSHes1EJSlZuAxXB8GNFu"></div>
+      <div class="text-danger mt-1" *ngIf="captchaInvalido">
+        <small>Por favor, verifica que no eres un robot.</small>
+      </div>
+    </div>
+
+    <!-- Botón iniciar sesión -->
+    <div class="d-grid mb-3">
+      <button class="btn btn-iniciar w-100" type="submit" [disabled]="form.invalid">Iniciar sesión</button>
+    </div>
+    </form>
+
+    <!-- Separador visual -->
+    <hr class="my-4" />
+
+    <!-- Botón registrarme -->
+    <div class="d-grid mb-3">
+      <button class="btn btn-registrar w-100" (click)="irARegistro()">Registrarme</button>
+    </div>
+
+    <!-- Continuar como invitado -->
+    <div class="text-center mt-3">
+      <p class="mb-2">¿Solo deseas comprar sin registrarte?</p>
+      <button class="btn btn-invitado w-100" (click)="continuarComoInvitado()">Continuar como invitado</button>
+    </div>
+    
+  </div>
+</div>

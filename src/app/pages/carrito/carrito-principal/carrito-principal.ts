@@ -1,6 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-//import { CarritoService } from '../../services/carrito';
-//import { CarritoModel } from '../../models/carrito-model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -61,8 +59,14 @@ export class CarritoPrincipal implements OnInit{
 
     constructor(private router: Router) {
     }
+
     continuarCompra() {
-    this.router.navigate(['/envio']);
-}
+    const usuario = localStorage.getItem('usuarioActivo');
+    if (!usuario) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/envio']);
+    }
+  }
 
 }

@@ -1,13 +1,82 @@
-.title-page-container{
-    height: 150px;
-    width: 100%;
-    background-image: url("../../../../public/img/bg-title.jpg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+.title-page-container {
+  height: 150px;
+  width: 100%;
+  background-image: url("../../../../public/img/bg-title.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
-.title-page-container h3{
-    font-weight: 700;
-    color: white;
+.title-page-container h3 {
+  font-weight: 700;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+/* Color verde para títulos */
+.titulo-verde {
+  color: #28a745;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+/* Estilo general del texto de contacto */
+.contacto-info {
+  color: #525252;
+  font-size: 1.1rem;
+}
+
+
+.contacto-label {
+  color: #676666;
+  font-weight: 600;
+}
+
+.icono-verde {
+  color: #28a745;
+}
+
+/* Estilos de campos del formulario */
+form .form-control {
+  background-color: #f4f7f4;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  color: #343a40;
+}
+
+form .form-control:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* Botón personalizado */
+form .btn-primary {
+  background-color: #28a745;
+  border: none;
+  font-weight: 600;
+  border-radius: 10px;
+}
+
+form .btn-primary:hover {
+  background-color: #218838;
+}
+
+
+/* ALERTA visual como en otras vistas */
+.alert-exito {
+  background-color: #e6f9ec;
+  color: #2e7d32;
+  border: 1px solid #b2dfdb;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-align: center;
+  padding: 10px 15px;
+  margin-top: 1rem;
+}
+
+/* Colores verdes para palabras clave */
+.contacto-info strong {
+  color: #28a745;
+}
+

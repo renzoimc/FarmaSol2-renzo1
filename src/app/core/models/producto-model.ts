@@ -4,5 +4,6 @@ export class ProductoModel {
     precio!: number;
     imagen!: string;
     descripcion!: string;
+    tipo!: string;
 }
 
