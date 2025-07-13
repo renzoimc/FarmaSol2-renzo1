@@ -17,7 +17,7 @@ export class CarritoService {
   // Acumula o crea un NUEVO item al carrito de compras
   agregar(producto: ProductoModel, cantidad: number = 1){
     this.obtenerSession(); 
-    const index = this.listCarrito.findIndex(item => item.producto.id == producto.id);
+    const index = this.listCarrito.findIndex(item => item.producto.id_producto == producto.id_producto);
 
     if(index == -1){
       // si no existe, se crear nuevo item
